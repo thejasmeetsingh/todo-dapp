@@ -15,7 +15,7 @@ contract Todo {
     event TaskAdded(string indexed _title, string indexed _description, bool indexed _isCompleted);
     event TaskUpdated(string indexed _title, string indexed _description);
     event TaskCompleted(bool indexed _isCompleted);
-    event TaskDeleted(uint indexed idx);
+    event TaskDeleted();
 
     modifier isValidIndex(uint _idx) {
         require(_idx < users[msg.sender].length);
@@ -39,17 +39,14 @@ contract Todo {
     function updateTask(uint _idx, string memory _title, string memory _description) external isValidIndex(_idx) {
         users[msg.sender][_idx].title = _title;
         users[msg.sender][_idx].description = _description;
-
         emit TaskUpdated(_title, _description);
     }
 
     function deleteTask(uint _idx) external isValidIndex(_idx) {
-        Task memory task = users[msg.sender][_idx];
-
-        users[msg.sender][_idx] = users[msg.sender][users[msg.sender].length - 1];
-        users[msg.sender][users[msg.sender].length - 1] = task;
+        for (uint idx = _idx + 1; idx < users[msg.sender].length; idx++) {
+            users[msg.sender][idx - 1] = users[msg.sender][idx];
+        }
         users[msg.sender].pop();
-
-        emit TaskDeleted(_idx);
+        emit TaskDeleted();
     }
 }
