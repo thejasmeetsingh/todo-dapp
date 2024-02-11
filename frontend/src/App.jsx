@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "./index.css";
 import AddTask from "./components/AddTask";
 import TaskList from "./components/TaskList";
 import useTaskContext from "./hooks/use-task-context";
@@ -11,8 +12,8 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <h1>TODO: DApp</h1>
+    <div className="container mx-auto px-4 py-12">
+      <h1 className="text-2xl font-bold mb-4 text-center">TODO: DApp</h1>
       <AddTask />
       <TaskList />
     </div>

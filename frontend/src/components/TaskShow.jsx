@@ -8,11 +8,20 @@ export default function TaskShow({ idx, task }) {
   };
 
   return (
-    <div>
-      <p>Index: {idx}</p>
-      <p>Title: {task.title}</p>
-      <p>Description: {task.description}</p>
-      <button onClick={handleDelete}>Delete</button>
+    <div className="space-y-4">
+      <div className="p-4 border rounded">
+        <h2 className="text-xl font-bold">{task.title}</h2>
+        <p className="mb-2">{task.description}</p>
+        <button className="bg-amber-400 hover:bg-amber-700 text-white font-bold py-1 px-2 rounded mr-2">
+          Edit
+        </button>
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }

@@ -22,22 +22,31 @@ export default function AddTask() {
   };
 
   return (
-    <div>
+    <div className="flex mb-8">
       <form onSubmit={handleSubmit}>
         <input
+          className="border flex-grow mr-2 p-2"
           value={title}
           onChange={handleTitleChange}
           autoFocus
           required
+          type="text"
           placeholder="Title"
         />
         <input
+          className="border flex-grow mr-2 p-2"
           value={description}
           onChange={handleDescriptionChange}
           required
+          type="text"
           placeholder="Description"
         />
-        <button>Add Task</button>
+        <button
+          type="submit"
+          className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
+        >
+          Add Task
+        </button>
       </form>
     </div>
   );
