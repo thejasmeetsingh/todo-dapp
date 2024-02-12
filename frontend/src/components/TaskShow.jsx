@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { FiEdit2, FiTrash2, FiCheckSquare } from "react-icons/fi";
 import useTaskContext from "../hooks/use-task-context";
 import EditTask from "./EditTask";
-import { FiEdit2, FiTrash2, FiCheckSquare } from "react-icons/fi";
 
 export default function TaskShow({ idx, task }) {
   const [showEdit, setShowEdit] = useState(false);

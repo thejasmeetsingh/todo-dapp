@@ -8,5 +8,5 @@ export default function TaskList() {
     return <TaskShow key={index} idx={index} task={task} />;
   });
 
-  return <div className="grid grid-cols-4 gap-4">{renderTask}</div>;
+  return <div className="grid grid-cols-3 gap-4">{renderTask}</div>;
 }
