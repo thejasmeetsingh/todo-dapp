@@ -18,10 +18,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.multi-line-truncate {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; /* Number of lines you want to display */
-  line-clamp: 3; /* Fallback for non-webkit browsers, might not be supported everywhere */
+.fold-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top: 25px solid rgba(255, 255, 255, 0.5);
+  border-left: 25px solid transparent;
+  width: 0;
+  height: 0;
 }

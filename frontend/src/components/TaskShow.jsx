@@ -13,7 +13,7 @@ export default function TaskShow({ idx, task }) {
 
   let content = (
     <div className="flex flex-col h-full">
-      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2 truncate">
+      <h5 className="text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white mb-2 truncate">
         {task.title}
       </h5>
       <p className="flex-1 font-normal text-gray-700 dark:text-gray-400 text-ellipsis overflow-hidden break-all">
@@ -60,7 +60,7 @@ export default function TaskShow({ idx, task }) {
   return (
     <div className="space-y-4">
       <div
-        className="group max-w-md mx-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-4 hover:bg-gray-50 dark:hover:bg-gray-700 relative overflow-hidden flex flex-col justify-between"
+        className="group max-w-md mx-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-4 hover:bg-gray-50 dark:hover:bg-gray-700 relative overflow-hidden flex flex-col justify-between fold-effect"
         style={{ height: "250px" }}
       >
         {content}

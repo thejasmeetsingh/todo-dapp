@@ -17,7 +17,7 @@ export default function AddTask() {
     <div className="flex mb-8 justify-center">
       <form onSubmit={handleSubmit}>
         <input
-          className="border flex-grow mr-1 p-2 rounded"
+          className="border flex-grow mr-1 p-2 w-96 rounded"
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
@@ -27,7 +27,7 @@ export default function AddTask() {
           type="text"
           placeholder="Title"
         />
-        <input
+        <textarea
           className="border flex-grow mr-1 p-2 w-96 rounded"
           value={description}
           onChange={(e) => {
@@ -39,7 +39,7 @@ export default function AddTask() {
         />
         <button
           type="submit"
-          className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
+          className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 w-96 rounded"
         >
           Add Task
         </button>
