@@ -17,3 +17,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.multi-line-truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Number of lines you want to display */
+  line-clamp: 3; /* Fallback for non-webkit browsers, might not be supported everywhere */
+}

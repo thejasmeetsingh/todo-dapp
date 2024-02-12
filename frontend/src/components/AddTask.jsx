@@ -6,16 +6,8 @@ export default function AddTask() {
   const [description, setDescription] = useState("");
   const { createTask } = useTaskContext();
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     createTask(title, description);
     setTitle("");
     setDescription("");
@@ -27,7 +19,9 @@ export default function AddTask() {
         <input
           className="border flex-grow mr-1 p-2 rounded"
           value={title}
-          onChange={handleTitleChange}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
           autoFocus
           required
           type="text"
@@ -36,7 +30,9 @@ export default function AddTask() {
         <input
           className="border flex-grow mr-1 p-2 w-96 rounded"
           value={description}
-          onChange={handleDescriptionChange}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
           required
           type="text"
           placeholder="Description"

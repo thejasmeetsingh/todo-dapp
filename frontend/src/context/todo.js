@@ -10,7 +10,7 @@ const Provider = ({ children }) => {
   }, []);
 
   const createTask = async (title, description) => {
-    setTasks([...tasks, { title, description }]);
+    setTasks([...tasks, { title, description, isCompleted: false }]);
   };
 
   const deleteTask = async (idx) => {
@@ -32,6 +32,17 @@ const Provider = ({ children }) => {
     setTasks(updatedTasks);
   };
 
+  const markTaskComplete = async (idx) => {
+    const updatedTasks = tasks.map((task, index) => {
+      if (index === idx) {
+        return { ...task, ...{ isCompleted: true } };
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  };
+
   return (
     <TaskContext.Provider
       value={{
@@ -40,6 +51,7 @@ const Provider = ({ children }) => {
         createTask,
         deleteTask,
         editTask,
+        markTaskComplete,
       }}
     >
       {children}
