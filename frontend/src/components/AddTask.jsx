@@ -22,10 +22,10 @@ export default function AddTask() {
   };
 
   return (
-    <div className="flex mb-8">
+    <div className="flex mb-8 justify-center">
       <form onSubmit={handleSubmit}>
         <input
-          className="border flex-grow mr-2 p-2"
+          className="border flex-grow mr-1 p-2 rounded"
           value={title}
           onChange={handleTitleChange}
           autoFocus
@@ -34,7 +34,7 @@ export default function AddTask() {
           placeholder="Title"
         />
         <input
-          className="border flex-grow mr-2 p-2"
+          className="border flex-grow mr-1 p-2 w-96 rounded"
           value={description}
           onChange={handleDescriptionChange}
           required

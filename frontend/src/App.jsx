@@ -12,8 +12,8 @@ const App = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-2xl font-bold mb-4 text-center">TODO: DApp</h1>
+    <div className="container mx-auto mt-20 px-4 py-12">
+      <h1 className="text-center text-2xl font-black mb-2">ToDo: D-App</h1>
       <AddTask />
       <TaskList />
     </div>
