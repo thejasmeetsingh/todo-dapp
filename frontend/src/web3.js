@@ -2,81 +2,19 @@ import Web3 from "web3";
 import todoJSON from "./Todo.json";
 
 function web3() {
-  return new Web3(
-    new Web3.providers.HttpProvider(process.env.REACT_APP_HTTP_PROVIDER)
-  );
+  return new Web3(window.ethereum);
 }
 
-function getDefaultAccount() {
-  return web3().eth.accounts[0];
+async function getCurrWalletAccount() {
+  const accounts = await web3().eth.getAccounts();
+  return accounts[0];
 }
 
-function getContractMethods() {
-  const contract = new web3().eth.Contract(
-    todoJSON.abi,
-    process.env.REACT_APP_CONTRACT_ADDRESS
-  );
-  const defaultAccount = getDefaultAccount();
+function getContract() {
+  const web3js = web3();
+  const contractAddress = "0x1983F2644E8c6C3e865b630D5BBA3b48D9f8e3ee";
 
-  const getTaskList = async () => {
-    return await contract.methods.getTaskList().call();
-  };
-
-  const addTask = async (title, description) => {
-    return await contract.methods
-      .addTask(title, description)
-      .send({ from: defaultAccount })
-      .on("receipt", (receipt) => {
-        console.log("Task added successfully");
-      })
-      .on("error", (error) => {
-        console.error("Error caught while adding task: ", error);
-      });
-  };
-
-  const markTaskComplete = async (index) => {
-    return await contract.methods
-      .markTaskComplete(index)
-      .send({ from: defaultAccount })
-      .on("receipt", (receipt) => {
-        console.log("Task marked complete successfully");
-      })
-      .on("error", (error) => {
-        console.error("Error caught while marking a task as complete: ", error);
-      });
-  };
-
-  const updateTask = async (index, title, description) => {
-    return await contract.methods
-      .updateTask(index, title, description)
-      .send({ from: defaultAccount })
-      .on("receipt", (receipt) => {
-        console.log("Task updated successfully");
-      })
-      .on("error", (error) => {
-        console.error("Error caught while updating task: ", error);
-      });
-  };
-
-  const deleteTask = async (index) => {
-    return await contract.methods
-      .deleteTask(index)
-      .send({ from: defaultAccount })
-      .on("receipt", (receipt) => {
-        console.log("Task deleted successfully");
-      })
-      .on("error", (error) => {
-        console.error("Error caught while deleting task: ", error);
-      });
-  };
-
-  return {
-    getTaskList,
-    addTask,
-    markTaskComplete,
-    updateTask,
-    deleteTask,
-  };
+  return new web3js.eth.Contract(todoJSON.abi, contractAddress);
 }
 
-export { web3, getDefaultAccount, getContractMethods };
+export { web3, getCurrWalletAccount, getContract };

@@ -1,27 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
-import { getDefaultAccount } from "../web3";
+import { getCurrWalletAccount } from "../web3";
 import useTaskContext from "../hooks/use-task-context";
 
 export default function () {
   const { fetchTasks } = useTaskContext();
-  let defaultAccount = getDefaultAccount();
+  const [currAccount, setCurrAccount] = useState("");
 
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  setInterval(function () {
-    // Check if account has changed
-    const currAccount = getDefaultAccount();
-
-    if (currAccount !== defaultAccount) {
-      defaultAccount = currAccount;
-      // Call a function to update the task with the new account
-      fetchTasks();
-    }
-  }, 100);
+  // setInterval(async function () {
+  //   // Check if account has changed
+  //   const account = await getCurrWalletAccount();
+  //   console.log(currAccount, account, currAccount === account);
+  //   if (currAccount !== account) {
+  //     setCurrAccount(account);
+  //     // Call a function to update the task list with the new account
+  //     fetchTasks();
+  //   }
+  // }, 1000);
 
   return (
     <div className="grid grid-cols-12 gap-12">
