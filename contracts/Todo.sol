@@ -11,12 +11,6 @@ contract Todo {
 
     mapping (address => Task[]) users;
 
-    // Task Events
-    event TaskAdded(address indexed user, string _title, string _description, bool _isCompleted);
-    event TaskUpdated(address indexed user, string _title, string _description);
-    event TaskCompleted(address indexed user, bool _isCompleted);
-    event TaskDeleted(address indexed user);
-
     modifier isValidIndex(uint _idx) {
         require(_idx < users[msg.sender].length);
         _;
@@ -28,18 +22,15 @@ contract Todo {
 
     function addTask(string memory _title, string memory _description) external {
         users[msg.sender].push(Task(_title, _description, false));
-        emit TaskAdded(msg.sender, _title, _description, false);
     }
 
     function markTaskComplete(uint _idx) external isValidIndex(_idx) {
         users[msg.sender][_idx].isCompleted = true;
-        emit TaskCompleted(msg.sender, true);
     }
 
     function updateTask(uint _idx, string memory _title, string memory _description) external isValidIndex(_idx) {
         users[msg.sender][_idx].title = _title;
         users[msg.sender][_idx].description = _description;
-        emit TaskUpdated(msg.sender, _title, _description);
     }
 
     function deleteTask(uint _idx) external isValidIndex(_idx) {
@@ -47,6 +38,5 @@ contract Todo {
             users[msg.sender][idx - 1] = users[msg.sender][idx];
         }
         users[msg.sender].pop();
-        emit TaskDeleted(msg.sender);
     }
 }

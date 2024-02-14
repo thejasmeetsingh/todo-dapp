@@ -12,7 +12,7 @@ async function getCurrWalletAccount() {
 
 function getContract() {
   const web3js = web3();
-  const contractAddress = "0x1983F2644E8c6C3e865b630D5BBA3b48D9f8e3ee";
+  const contractAddress = "0x5f7aa46F594566aD958338647b363Cf43BfeEAA9";
 
   return new web3js.eth.Contract(todoJSON.abi, contractAddress);
 }

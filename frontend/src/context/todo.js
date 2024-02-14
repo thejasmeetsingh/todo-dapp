@@ -1,5 +1,5 @@
 import { createContext, useCallback, useState } from "react";
-import { web3, getCurrWalletAccount, getContract } from "../web3";
+import { getCurrWalletAccount, getContract } from "../web3";
 
 const TaskContext = createContext();
 
@@ -25,6 +25,7 @@ function Provider({ children }) {
       .send({ from: currAccount })
       .on("receipt", (receipt) => {
         console.log("Task added successfully");
+
         setTasks([...tasks, { title, description, isCompleted: false }]);
       })
       .on("error", (error) => {
@@ -40,11 +41,12 @@ function Provider({ children }) {
       .send({ from: currAccount })
       .on("receipt", (receipt) => {
         console.log("Task deleted successfully");
-        const updatedTasks = tasks.filter((_, index) => {
-          return index !== idx;
-        });
 
-        setTasks(updatedTasks);
+        setTasks(
+          tasks.filter((_, index) => {
+            return index !== idx;
+          })
+        );
       })
       .on("error", (error) => {
         console.error("Error caught while deleting task: ", error);
@@ -59,14 +61,15 @@ function Provider({ children }) {
       .send({ from: currAccount })
       .on("receipt", (receipt) => {
         console.log("Task updated successfully");
-        const updatedTasks = tasks.map((task, index) => {
-          if (index === idx) {
-            return { ...task, ...{ title, description } };
-          }
-          return task;
-        });
 
-        setTasks(updatedTasks);
+        setTasks(
+          tasks.map((task, index) => {
+            if (index === idx) {
+              return { ...task, ...{ title, description } };
+            }
+            return task;
+          })
+        );
       })
       .on("error", (error) => {
         console.error("Error caught while updating task: ", error);
@@ -80,15 +83,16 @@ function Provider({ children }) {
       .markTaskComplete(idx)
       .send({ from: currAccount })
       .on("receipt", (receipt) => {
-        console.log("Task marked complete successfully");
-        const updatedTasks = tasks.map((task, index) => {
-          if (index === idx) {
-            return { ...task, ...{ isCompleted: true } };
-          }
-          return task;
-        });
+        console.log("Task marked as completed successfully");
 
-        setTasks(updatedTasks);
+        setTasks(
+          tasks.map((task, index) => {
+            if (index === idx) {
+              return { ...task, ...{ isCompleted: true } };
+            }
+            return task;
+          })
+        );
       })
       .on("error", (error) => {
         console.error("Error caught while marking a task as complete: ", error);
